@@ -1,0 +1,91 @@
+<th:block th:fragment="virus-form" th:object="${virusBindingModel}">
+    <div id="virus-form">
+        <div class="form-group">
+            <label for="virus-name">Name</label>
+            <input class="form-control" type="text" id="virus-name" th:field="*{name}"
+                   th:styleappend="${#fields.hasErrors('name')} ? 'border-color: red'">
+            <small style="color: red" th:each="error : ${#fields.errors('name')}" th:text="${error}"></small>
+        </div>
+        <div class="form-group">
+            <label for="virus-description">Description</label>
+            <textarea id="virus-description" class="form-control" th:field="*{description}"
+                      th:styleappend="${#fields.hasErrors('description')} ? 'border-color: red'"></textarea>
+            <small style="color: red" th:each="error : ${#fields.errors('description')}" th:text="${error}"></small>
+        </div>
+        <div class="form-group">
+            <label for="virus-side-effects">Side Effects</label>
+            <input class="form-control" type="text" id="virus-side-effects" th:field="*{sideEffects}"
+                   th:styleappend="${#fields.hasErrors('sideEffects')} ? 'border-color: red'">
+            <small style="color: red" th:each="error : ${#fields.errors('sideEffects')}" th:text="${error}"></small>
+        </div>
+        <div class="form-group">
+            <label for="virus-creator">Creator</label>
+            <input class="form-control" type="text" id="virus-creator" th:field="*{creator}"
+                   th:styleappend="${#fields.hasErrors('creator')} ? 'border-color: red'">
+            <small style="color: red" th:each="error : ${#fields.errors('creator')}" th:text="${error}"></small>
+        </div>
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" th:field="*{deadly}" id="virus-is-deadly">
+            <label class="form-check-label" for="virus-is-deadly">
+                Is Deadly?
+            </label>
+        </div>
+        <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" th:field="*{curable}" id="virus-is-curable">
+            <label class="form-check-label" for="virus-is-curable">
+                Is Curable?
+            </label>
+        </div>
+        <div class="form-check">
+            <th:block th:each="mutation : ${mutations}">
+                <input class="form-check-input" type="radio" id="virus-mutation" th:value="${mutation}"
+                       th:field="*{mutation}">
+                <label class="form-check-label" for="virus-mutation" th:text="${mutation}"
+                       th:styleappend="${#fields.hasErrors('mutation')} ? 'color: red'">
+                </label>
+                <br/>
+            </th:block>
+            <input class="form-check-input" type="radio" value="Save Humanity" disabled>Save Humanity
+            <br/>
+            <small style="color: red" th:each="error : ${#fields.errors('mutation')}" th:text="${error}"></small>
+        </div>
+        <div class="form-group">
+            <label for="virus-turnover-rate">Turnover Rate</label>
+            <input type="number" id="virus-turnover-rate" class="form-control" th:field="*{turnoverRate}"
+                   th:styleappend="${#fields.hasErrors('turnoverRate')} ? 'border-color: red'">
+            <small style="color: red" th:each="error : ${#fields.errors('turnoverRate')}" th:text="${error}"></small>
+        </div>
+        <div class="form-group">
+            <label for="virus-hours-until-turn">Hours Until Turn</label>
+            <input type="number" id="virus-hours-until-turn" class="form-control" th:field="*{hoursUntilTurn}"
+                   th:styleappend="${#fields.hasErrors('hoursUntilTurn')} ? 'border-color: red'">
+            <small style="color: red" th:each="error : ${#fields.errors('hoursUntilTurn')}" th:text="${error}"></small>
+        </div>
+        <div class="form-group">
+            <label for="virus-magnitude">Magnitude</label>
+            <select id="virus-magnitude" class="form-control" th:field="*{magnitude}">
+                <th:block th:each="magnitude : ${magnitudes}">
+                    <option th:value="${magnitude}" th:text="${magnitude}"></option>
+                </th:block>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="virus-release-date">Release Date</label>
+            <input type="date" id="virus-release-date" class="form-control" th:field="*{releasedOn}"
+                   th:styleappend="${#fields.hasErrors('releasedOn')} ? 'border-color: red'" th:value="*{releasedOn}">
+            <small style="color: red" th:each="error : ${#fields.errors('releasedOn')}" th:text="${error}"></small>
+        </div>
+        <div class="form-group">
+            <label for="virus-capitals">Affected Capitals</label>
+            <select class="custom-select" id="virus-capitals" multiple="multiple" th:field="*{capitalIds}"
+                    th:styleappend="${#fields.hasErrors('capitalIds')} ? 'border-color: red'">
+                <th:block th:each="capital : ${capitals}">
+                    <option th:value="${capital.id}" th:text="${capital.name}"></option>
+                </th:block>
+            </select>
+            <small style="color: red" th:each="error : ${#fields.errors('capitalIds')}" th:text="${error}"></small>
+        </div>
+        <button type="submit" id="submitButton"></button>
+    </div>
+
+</th:block>

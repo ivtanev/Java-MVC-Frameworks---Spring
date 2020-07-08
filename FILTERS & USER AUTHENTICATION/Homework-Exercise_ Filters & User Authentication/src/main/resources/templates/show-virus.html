@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+
+<div class="container-fluid">
+    <header>
+        <th:block th:include="~{fragments/navbar}"></th:block>
+    </header>
+    <main>
+        <div class="jumbotron all-viruses-background">
+            <h1>All Viruses</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Magnitude</th>
+                    <th scope="col">Released On</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="virus, iter : ${viruses}">
+                    <tr>
+                        <th scope="row" th:text="${iter.count}"></th>
+                        <td th:text="${virus.name}"></td>
+                        <td th:text="${virus.magnitude}"></td>
+                        <td th:text="${virus.releasedOn}"></td>
+                        <td><a class="btn re-background" th:href="@{/viruses/edit/{id}(id=${virus.id})}">Edit</a></td>
+                        <td><a class="btn re-background" th:href="@{/viruses/delete/{id}(id=${virus.id})}">Delete</a></td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
